@@ -16,7 +16,7 @@
     "lint": "eslint --ext .js --ext .jsx ./app ./webpack && echo No linting errors.",
     "prebuild": "npm run clean",
     "prestart": "npm install",
-    "start": "NODE_ENV=development node dev-server ./webpack/config",
+    "start": "node dev-server ./webpack/config",
     "webpack": "webpack --colors --progress --config ./webpack/config"
   },
   "dependencies": {

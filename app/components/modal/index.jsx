@@ -1,7 +1,5 @@
-import querystring from 'qs';
 import styles from './styles.scss';
-import Cookie from 'js-cookie';
-import _ from 'lodash';
+
 import React from 'react';
 import { nuclearComponent, provideReactor } from 'nuclear-js-react-addons';
 import cx from 'classnames';
@@ -31,22 +29,6 @@ export default class Modal extends React.Component {
     footer: false,
     position: 'centered' // valid values are 'top' and 'centered'
   };
-
-  componentDidMount() {
-    var data = _.merge(
-      {},
-      _.omit(this.props, 'data'),
-      this.props.data
-    );
-
-    if (Cookie.get('homeLightbox') === undefined && window.location.pathname === '/'){
-      Actions.openModal(this.props);
-      Cookie.set('homeLightbox', 'true', { expires: 7 });
-    }
-    else if (querystring.parse(window.location.search.replace('?', '')).p === 't'){
-      Actions.openModal(this.props);
-    }
-  }
 
   handleClick(type, e) {
     e.preventDefault();
