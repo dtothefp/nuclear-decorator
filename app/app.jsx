@@ -4,10 +4,10 @@ import 'babel-core/polyfill';
 import 'normalize.css/normalize.css';
 
 import React from 'react';
-import App from './components/App';
+import Modal from './components/modal';
 import reactor from './modules/reactor';
 
 React.render(
-  <App reactor={reactor} />,
+  <Modal reactor={reactor} />,
   document.getElementById('app')
 );
