@@ -1,3 +1,5 @@
+typeof process.env.NODE_ENV === 'undefined' ? process.env.NODE_ENV = 'development' : null;
+
 var util = require('util');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
