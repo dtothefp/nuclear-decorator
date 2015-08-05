@@ -4,21 +4,24 @@ import 'babel-core/polyfill';
 import 'normalize.css/normalize.css';
 
 import React from 'react';
-import Modal from './components/modal';
+import Modals from './components/modals';
 import reactor from './modules/reactor';
 import querystring from 'qs';
-import Cookie from 'js-cookie';
 import {Actions} from './modules/modal';
 
-if (Cookie.get('homeLightbox') === undefined && window.location.pathname === '/'){
-  Actions.openModal();
-  Cookie.set('homeLightbox', 'true', { expires: 7 });
-}
-else if (querystring.parse(window.location.search.replace('?', '')).p === 't'){
-  Actions.openModal();
+const homeModalId = 'home-lightbox';
+let params = querystring.parse(window.location.search.replace('?', ''));
+let keys = Object.keys(params);
+
+if(keys.length) {
+  keys.forEach((key) => {
+    if(params[key]) {
+      Actions.openModal({id: key});
+    }
+  });
 }
 
 React.render(
-  <Modal reactor={reactor} />,
+  <Modals reactor={reactor} modalIds={keys} />,
   document.getElementById('app')
 );

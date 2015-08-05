@@ -1,10 +1,10 @@
 import reactor from '../reactor';
 import {OPEN, CLOSE} from './modal-constants';
 
-export const openModal = function openModal(data) {
-  reactor.dispatch(OPEN, data);
+export const openModal = function openModal(id) {
+  reactor.dispatch(OPEN, id);
 };
 
-export const closeModal = function closeModal() {
-  reactor.dispatch(CLOSE, {});
+export const closeModal = function closeModal(id) {
+  reactor.dispatch(CLOSE, id);
 };

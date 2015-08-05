@@ -1,5 +1,8 @@
-export const title = ['modalContent', 'title'];
-
-export const content = ['modalContent', 'content'];
-
-export const isOpen = ['modalIsOpen'];
+export function isOpen(currentId) {
+  return [
+    ['modalIsOpen', 'id'],
+    (modalList) => {
+      return modalList.indexOf(currentId) !== -1;
+    }
+  ];
+}
