@@ -1,8 +1,8 @@
-export function isOpen(currentId) {
-  return [
-    ['modalIsOpen', 'id'],
-    (modalList) => {
-      return modalList.indexOf(currentId) !== -1;
-    }
-  ];
-}
+export const modalsOpenStatuses = ['modalIsOpen'];
+
+export const openModalIds = [
+  modalsOpenStatuses,
+  (modals) => {
+    return modals.filter(status => status).keySeq().toJS();
+  }
+];

@@ -3,30 +3,19 @@ import {OPEN, CLOSE} from './modal-constants';
 
 export const isOpenStore = Store({
   getInitialState() {
-    return false;
+    return toImmutable({}); // You want to keep the same data type throughout
   },
 
   initialize() {
-    // Sets isOpen to true
-    this.on(OPEN, (state, {id}) => {
-      let newState;
-      if(!state) {
-        newState = toImmutable({id: [id]});
-      } else if(!state.get('id').filter((i) => id === i ).size) {
-        newState = toImmutable({id: state.get('id').push(id)});
-      } else {
-        newState = state;
-      }
-      return newState;
-    });
+    // Creates a mapping of modalId => open state
+    // Example: isOpenStore { 'home-modal': true, 'other-modal': false, ... }
+    this.on(OPEN, (state, { id }) => state.set(id, true));
 
-    // Reverts to initial state
-    this.on(CLOSE, (state, {id}) => {
-      state = state.toJS();
-      let i = state.id.indexOf(id);
-      state.id.splice(i, 1);
+    // Updates the open state for a modalId key.
+    this.on(CLOSE, (state, { id }) => {
+      if (!state.has(id)) return state;
 
-      return toImmutable(state);
+      return state.set(id, false);
     });
   }
 });
